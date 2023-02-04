@@ -68,6 +68,4 @@ systemctl enable mtproto-proxy
 ```
 
 Все готово. Для того, чтобы пользователи смогли подключиться к прокси генерируем ссылку:
-`tg://proxy?server=5.181.202.204&port=443&secret=73b86d7de03d7653069d228f45cfb585`
-
-#Web
+`tg://proxy?server=<ip_adress>&port=443&secret=<secret>`
