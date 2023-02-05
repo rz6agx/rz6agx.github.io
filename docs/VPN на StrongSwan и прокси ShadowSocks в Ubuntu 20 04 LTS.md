@@ -167,9 +167,9 @@ net/ipv4/ip_no_pmtu_disc=1
   `ufw disable`
   `ufw enable`
 
-## Step 2, Tune the kernel parameters (необязательно)
+## Step 2, Tune the kernel parameters
 
-The priciples of tuning parameters for shadowsocks are:
+Необязательно, но желательно [рекомендуется в официальном мануале](https://shadowsocks.org/guide/advanced.html). The priciples of tuning parameters for shadowsocks are:
 * Reuse ports and conections as soon as possible.
 * Enlarge the queues and buffers as large as possible.
 * Choose the TCP congestion algorithm for large latency and high throughput.
