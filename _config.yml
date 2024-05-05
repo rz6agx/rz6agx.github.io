@@ -9,7 +9,7 @@ name: rz6agx blog
 description: My notes and small articles
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars.githubusercontent.com/u/82819555?v=4
+avatar: https://avatars.githubusercontent.com/u/82819555
 #
 # Flags below are optional
 #
@@ -46,7 +46,7 @@ url: https://rz6agx.github.io
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: "https://github.com/rz6agx/rz6agx.github.io"
+baseurl: "/rz6agx.github.io"
 
 #
 # !! You don't need to change any of the configuration flags below !!
