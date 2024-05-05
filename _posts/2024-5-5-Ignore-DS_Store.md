@@ -2,6 +2,7 @@
 layout: post
 title: "Игнорировать файлы .DS_Store в Github"
 ---
+
 # Игнорировать файлы .DS_Store в Github
 
 ## Создайте файл .gitignore
