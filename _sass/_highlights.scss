@@ -9,11 +9,22 @@
   overflow: auto;
 }
 
-/* Стиль для текста кода */
-code {
+/* Сбрасываем стили у <code> внутри <pre> */
+.highlight pre {
+  margin: 0; /* Убираем дополнительные отступы */
+  background: none; /* Фон берется из .highlight */
+  border: none; /* Убираем лишние рамки */
+  padding: 0; /* Убираем отступы у <pre> */
+  overflow: visible; /* Убираем ограничения прокрутки */
+}
+
+.highlight code {
   font-family: "Courier New", Courier, monospace; /* Стандартный моноширинный шрифт */
   font-size: 14px;
   color: #24292e; /* Темный цвет текста */
+  background: none; /* Убираем фон у <code> внутри <pre> */
+  padding: 0; /* Убираем отступы у <code> */
+  border: none; /* Убираем рамку у <code> */
 }
 
 /* Стили для подсветки */
