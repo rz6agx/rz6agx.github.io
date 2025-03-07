@@ -102,42 +102,116 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
 
 **1. Inbounds:**
 ```json
-"inbounds": [
-  {
-    "port": 1080,
-    "protocol": "socks",
-    "settings": {
-      "udp": true
+  "inbounds": [
+    {
+      "port": 1080,
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
     }
-  }
-]
+  ]
 ```
 
 Входящее соединение настроено на порт 1080 с использованием протокола **SOCKS**. Также включена поддержка UDP-трафика.
 
+**1.1 Inbounds: VLESS**
+
+Если вас не утраивает открытый порт **SOCKS5** с доступом без имени и пароля, то можно использовать не менее быстрый транспорт **VLESS**, который лишь немного проиграет по скорости чистому **SOCKS5**, но даст вам аутентификацию клиента по **id**, секция `inbounds` будет выглядеть так:
+
+```json
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "f569a24a-c5a2-43f5-bf67-0174fa7646b0"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "none"
+      }
+    },
+  ],
+```
+**id** можно сгенерировать на сервере или на клиенте командой: `xray uuid`
+
+**1.2 Inbounds: XTLS-REALITY**
+
+Если прям хочется зашифровать трафик (в чём я не вижу принципиальной необходимости, соединение с локальным сервером не вызовет подозрений, особенной если это один из отечественных облачных провайдеров), то используем **XTLS-REALITY**, которое создаст зашифрованное соединение. Если клиент опознан как "свой", сервер работает как прокси, а если нет - TLS подключение передается на какой-нибудь другой абсолютно реальный хост с TLS. Тут я рекомендую в качестве маскировочного сайта использовать сайт провайдера (обычно он расположен в той же подсети, где и арендованный вами локальный сервер). При этом секция `inbounds` будет выглядеть так:
+
+```json
+  "inbounds": [
+    {
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "your-uuid-here",
+            "flow": "xtls-rprx-vision"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "target": "cloud.ru:443",
+          "serverNames": ["cloud.ru"],
+          "privateKey": "your-private-key",
+          "shortIds": ["your-short-id"]
+        }
+      }
+    }
+  ],
+```
+
+Для настройки понадобится ряд параметров, это `id`, `privateKey`, `publicKey`. Часть из них нам может сгенерировать сам **XRay**:
+
+```sh
+root@vps:~# /usr/local/bin/xray uuid
+55e2d01a-53f1-4ebe-8a67-eb36e57d5700
+
+root@vps:~# /usr/local/bin/xray x25519
+Private key: 6JQrpGi8Hgro0YCqiqRdN2ZK4snF82gA2kaMxgneKjM
+Public key: lSpaRL7VvEpPzVwiLO4pJfxJQmIyMpnSXXDLorxtzx0
+
+root@vps:~# openssl rand -hex 8
+872e7b9a1b169d29
+```
+
 **2. Outbounds:**
 ```json
-"outbounds": [
-  {
-    "protocol": "freedom",
-    "tag": "direct",
-    "settings": {}
-  },
-  {
-    "protocol": "shadowsocks",
-    "tag": "proxy",
-    "settings": {
-      "servers": [
-        {
-          "address": "IP_заграничного_сервера",
-          "port": 8388,
-          "method": "aes-256-gcm",
-          "password": "your_password"
-        }
-      ]
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct",
+      "settings": {}
+    },
+    {
+      "protocol": "shadowsocks",
+      "tag": "proxy",
+      "settings": {
+        "servers": [
+          {
+            "address": "IP_заграничного_сервера",
+            "port": 8388,
+            "method": "aes-128-gcm",
+            "password": "your_password"
+          }
+        ]
+      }
     }
-  }
-]
+  ]
 ```
 
 Здесь определены два исходящих маршрута:
