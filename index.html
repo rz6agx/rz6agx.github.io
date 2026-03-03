@@ -1,18 +1,140 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rz6agx — инженерный профиль</title>
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
+  <style>
+    :root {
+      --bg: #0f1115;
+      --text: #e6e6e6;
+      --muted: #9aa0a6;
+      --accent: #4da3ff;
+      --border: #2a2f3a;
+    }
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-      <div class="entry">
-        {{ post.excerpt }}
+    .container {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tags {
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 6px;
+      margin-right: 6px;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Профиль -->
+    <h1>rz6agx</h1>
+    <p>
+      Инженер / технический эксперт.<br />
+      Сетевые технологии, обход ограничений, практические конфигурации.
+    </p>
+
+    <p>
+      <a href="https://github.com/rz6agx">GitHub</a> ·
+      <a href="https://gist.github.com/rz6agx">Gist</a>
+    </p>
+
+    <!-- Статьи -->
+    <div class="section">
+      <h2>Материалы</h2>
+
+      <!-- Пример карточки -->
+      <div class="card">
+        <div class="card-title">
+          <a href="#">Xray + Shadowsocks: базовая схема</a>
+        </div>
+        <div class="card-desc">
+          Минимальная рабочая конфигурация для обхода ограничений с поддержкой UDP.
+        </div>
+        <div class="tags">
+          <span class="tag">xray</span>
+          <span class="tag">shadowsocks</span>
+          <span class="tag">network</span>
+        </div>
       </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+      <!-- сюда потом добавишь свои реальные гисты -->
+
+    </div>
+
+    <!-- О себе -->
+    <div class="section">
+      <h2>О себе</h2>
+      <p>
+        Практический опыт настройки прокси-инфраструктуры, тестирования сетевых решений
+        и подготовки экспертных заключений.
+      </p>
+    </div>
+
+    <footer>
+      © rz6agx
+    </footer>
+
+  </div>
+</body>
+</html>
